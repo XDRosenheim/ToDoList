@@ -3,7 +3,7 @@ package dk.ToDoList;
 import java.sql.*;
 
 public class DBTools {
-	String conStr = "jdbc:mysql://localhost/ToDoList";
+	String connectionURL = "jdbc:mysql://localhost/ToDoList";
 	Connection con;
 	Statement stmt;
 	ResultSet rs;
@@ -11,7 +11,8 @@ public class DBTools {
 	public DBTools() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(conStr, "root", "rooPassword");
+			con = DriverManager.getConnection(connectionURL, "root", "rootPassword");
+			
 			stmt = con.createStatement();
 			System.out.println("Success.");
 		} catch (SQLException e) {
@@ -41,5 +42,5 @@ public class DBTools {
 			e.printStackTrace();
 		}
 		return list;
-	}		
+	}
 }
