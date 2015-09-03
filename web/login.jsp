@@ -23,9 +23,9 @@
 		<div class="container">
 			<form class="form-signin" method="post" action="loggingin.jsp">
 				<h2 class="form-signin-heading">Please sign in</h2>
-				<label for="inputEmail" class="sr-only" id="txtPassword">Username</label>
-				<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-				<label for="inputPassword" class="sr-only" id="txtPassword">Password</label>
+				<label for="inputEmail" class="sr-only">Username</label>
+				<input type="text" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+				<label for="inputPassword" class="sr-only">Password</label>
 				<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 				<br />
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>

@@ -15,16 +15,17 @@
     </head>
     <body style="background-color: lightgray">
         <div class="container">
-			<form class="form-signin">
-				<h2 class="form-signin-heading">Register</h2>
-				<label for="inputEmail" class="sr-only" id="txtUsername">Username</label>
-				<input type="email" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-				<label for="inputPassword" class="sr-only">Password</label>
-				<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-				<label for="inputPasswordAgain" class="sr-only">Confirm password</label>
-				<input type="password" id="inputPasswordAgain" class="form-control" placeholder="Confirm Password" required="">
-				<br />
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+			<form method="post" action="registration.jsp">
+				<table>
+					<tr>
+						<th colspan="2">Enter Information Here</th>
+					</tr>
+					<input name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
+					<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+					<input name="passwordAgain"type="password" id="inputPasswordAgain" class="form-control" placeholder="Confirm Password" required="">
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+					<a href="login.jsp">Login Here</a>
+				</table>
 			</form>
 		</div>
     </body>

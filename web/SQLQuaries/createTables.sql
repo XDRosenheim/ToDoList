@@ -3,7 +3,7 @@ use ToDoList;
 create table ToDo(
 	ID int NOT NULL AUTO_INCREMENT,
     userOwner int NOT NULL REFERENCES users(id),
-	textToDo text,
+	textToDo text NOT NULL,
 	remind boolean NOT NULL,
 	dato date,
 	freq int references frequency(ID),
@@ -42,3 +42,4 @@ values (1, 'This is my Birthday text', true, now(), 1, 11),
         (2, 'This is my Other text', true, now(), 4, 3);
 
 SELECT * FROM ToDo;
+SELECT * FROM users;

@@ -3,16 +3,14 @@
     String userid = request.getParameter("username");    
     String pwd = request.getParameter("pass");
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbname", "root", "dbpass");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ToDoList", "root", "rootPassword");
     Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("select * from members where uname='" + userid + "' and pass='" + pwd + "'");
+    rs = st.executeQuery("select * from users where username='" + userid + "' and passphrase='" + pwd + "'");
     if (rs.next()) {
         session.setAttribute("userid", userid);
-        //out.println("welcome " + userid);
-        //out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");
     } else {
-        out.println("Invalid password <a href='index.jsp'>try again</a>");
+        out.println("s<a href='index.jsp'>try again</a>");
     }
 %>
