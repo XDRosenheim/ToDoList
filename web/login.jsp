@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <% //Go to index if logged in.
-	if (session.getAttribute("LoggedIn") != null) {
+	if (session.getAttribute("LoggedName") != null) {
 			response.sendRedirect("index.jsp");
 	}
 %>
@@ -21,11 +21,11 @@
     </head>
     <body style="background-color: lightgray" >
 		<div class="container">
-			<form class="form-signin">
+			<form class="form-signin" method="post" action="loggingin.jsp">
 				<h2 class="form-signin-heading">Please sign in</h2>
-				<label for="inputEmail" class="sr-only">Username</label>
+				<label for="inputEmail" class="sr-only" id="txtPassword">Username</label>
 				<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-				<label for="inputPassword" class="sr-only">Password</label>
+				<label for="inputPassword" class="sr-only" id="txtPassword">Password</label>
 				<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 				<br />
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
