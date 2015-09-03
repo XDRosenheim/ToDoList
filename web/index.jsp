@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="dk.ToDoList.DBTools" %>
-<%@ page import="dk.ToDoList.List" %>
+<%@ page import="dk.ToDoList.*" %>
 
 <html>
 <head>
@@ -60,13 +59,12 @@
     );
     </script>
 
-	<% 
+	<%
 		DBTools dbTools = new DBTools();
-		List list = dbTools.getToDoById(1);
+		List list = dbTools.getToDoById(2);
 	%>
 	<form>
-		ToDo: <input type="text" name="textToDo" value="<% list.getTextToDo(); %>" />
+		ToDo: <input type="text" name="txtFName" value="<%=list.getTextToDo()%>" />
 	</form>
-
 </body>
 </html>
