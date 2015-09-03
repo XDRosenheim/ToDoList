@@ -13,3 +13,5 @@ hs_err_pid*
 /build/
 web/TestConnection.jsp
 /nbproject/private/
+/dist/
+web/TestConnection.jsp
