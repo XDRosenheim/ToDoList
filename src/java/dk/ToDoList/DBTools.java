@@ -33,7 +33,7 @@ public class DBTools {
 				rs.getInt("Id"),
 				rs.getString("textToDo"),
 				rs.getBoolean("remind"),
-				rs.getString("dato"),
+				rs.getDate("dato"),
 				rs.getInt("freq"),
 				rs.getInt("cat") );
 			}
