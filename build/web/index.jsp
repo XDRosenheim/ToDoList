@@ -12,19 +12,23 @@
 <body>
 <div id="container"></div>
 
+<% 
+    DBTools db = new DBTools();
+   
+%>
+
 <script type="text/jsx">
     /** @jsx React.DOM */
-    
     var TodoItems = React.createClass({
         render: function() {
             return <table className="table">
-                    <tbody>
-                        <tr><td><h3>Text1</h3></td></tr>
-                        <tr><td><h3>Text2</h3></td></tr>
-                        <tr><td><h3>Text3</h3></td></tr>
-                        <tr><td><h3>Text4</h3></td></tr>
-                     </tbody>
-                    </table>
+                        <tbody>
+                            <tr><td><h3>Text1</h3></td></tr>
+                            <tr><td><h3>Text2</h3></td></tr>
+                            <tr><td><h3>Text3</h3></td></tr>
+                            <tr><td><h3>Text4</h3></td></tr>
+                         </tbody>
+                    </table>;
        }
     });
     
@@ -32,7 +36,8 @@
        render:function() {
            return <div className={this.props.navClass}>
                         <a href="#" className={this.props.brand}>Todo List</a>
-                        <input className="btn" type="button" value="Add ToDo"/>
+                        <input className="btn btn-default navbar-btn" type="button">
+                        <span 
                    </div>;
        } 
     });
