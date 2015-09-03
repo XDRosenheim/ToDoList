@@ -11,7 +11,7 @@ public class DBTools {
 	public DBTools() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(connectionURL, "root", "rootPassword");
+			con = DriverManager.getConnection(connectionURL, "root", "admin");
 			stmt = con.createStatement();
 			System.out.println("Success.");
 		} catch (SQLException e) {
@@ -26,7 +26,7 @@ public class DBTools {
 	public List getToDoById(int id) {
 		List list = null;
 		try {
-			rs = stmt.executeQuery("select * from ToDo where id = " + id);
+			rs = stmt.executeQuery("select * from todo where id = " + id);
 			if(rs.next()) {
 				list = new List(
 				rs.getInt("Id"),
