@@ -7,12 +7,11 @@ public class DBTools {
 	Connection con;
 	Statement stmt;
 	ResultSet rs;
-	
+
 	public DBTools() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(connectionURL, "root", "rootPassword");
-			
 			stmt = con.createStatement();
 			System.out.println("Success.");
 		} catch (SQLException e) {
