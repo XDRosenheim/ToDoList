@@ -2,6 +2,8 @@ package dk.ToDoList;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBTools {
 	String connectionURL = "jdbc:mysql://localhost/ToDoList";
@@ -10,6 +12,7 @@ public class DBTools {
 	ResultSet rs;
 
 	public DBTools() {
+        
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(connectionURL, "root", "admin");
@@ -39,15 +42,38 @@ public class DBTools {
 			}
 		} catch (SQLException e) {
 			System.out.println("Exception!!! " + e.getMessage());
-			e.printStackTrace();
 		}
 		return list;
 	}
         
-        public ArrayList<List> getAllEntries(){
+        public List getAllEntries(){
+            try {
+                this.stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
             
+            List allEntries = null;
+            try {
+               ResultSet rst;
+                rst = this.stmt.executeQuery("select textToDo from todo");
+                int rows = 0;   
+                if (rst.last()) {
+                  rows = rst.getRow();
+                // Move to beginning
+                rst.beforeFirst();
+                }  
+                  
+                for (int i = 0; i < rows; rows++) {
+                    
+                    rst.getString(i);
+                }   
+
+                
+            } catch (SQLException ex) {
+               System.out.println(ex);
+            }
             
-            
-            return null;
+            return allEntries;
         }
 }
