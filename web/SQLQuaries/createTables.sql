@@ -42,4 +42,3 @@ values (1, 'This is my Birthday text', true, now(), 1, 11),
         (2, 'This is my Other text', true, now(), 4, 3);
 
 SELECT * FROM ToDo;
-SELECT * FROM users;

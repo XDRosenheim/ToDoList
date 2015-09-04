@@ -20,3 +20,5 @@ nbproject/private/private.properties
 build/web/index.jsp
 nbproject/private/private.properties
 src/java/dk/ToDoList/DBTools.java
+nbproject/private/private.properties
+src/java/dk/ToDoList/DatabaseString.java
