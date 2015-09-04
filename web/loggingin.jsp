@@ -8,7 +8,7 @@
     ResultSet rs;
     rs = st.executeQuery("select * from users where username='" + userid + "' and passphrase='" + pwd + "'");
     if (rs.next()) {
-        session.setAttribute("userid", userid);
+        session.setAttribute("LoggedIn", userid);
         response.sendRedirect("success.jsp");
     } else {
         out.println("s<a href='index.jsp'>try again</a>");

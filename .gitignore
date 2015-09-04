@@ -14,3 +14,6 @@ hs_err_pid*
 web/TestConnection.jsp
 /nbproject/*
 /dist/*
+build/web/gfv3ee6.dpf
+build/web/index.jsp
+nbproject/private/private.properties
