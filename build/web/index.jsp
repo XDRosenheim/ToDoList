@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="dk.ToDoList.*" %>
 
+<!DOCTYPE html>
 <html>
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
@@ -12,10 +13,7 @@
 <body>
 <div id="container"></div>
 
-<% 
-    DBTools db = new DBTools();
-   
-%>
+
 
 <script type="text/jsx">
     /** @jsx React.DOM */
@@ -23,10 +21,10 @@
         render: function() {
             return <table className="table">
                         <tbody>
-                            <tr><td><h3>Text1</h3></td></tr>
-                            <tr><td><h3>Text2</h3></td></tr>
-                            <tr><td><h3>Text3</h3></td></tr>
-                            <tr><td><h3>Text4</h3></td></tr>
+                            <tr><td><h4>Text1</h4></td></tr>
+                            <tr><td><h4>Text2</h4></td></tr>
+                            <tr><td><h4>Text3</h4></td></tr>
+                            <tr><td><h4>Text4</h4></td></tr>
                          </tbody>
                     </table>;
        }
@@ -36,8 +34,7 @@
        render:function() {
            return <div className={this.props.navClass}>
                         <a href="#" className={this.props.brand}>Todo List</a>
-                        <input className="btn btn-default navbar-btn" type="button">
-                        <span 
+                        <input className="btn btn-default navbar-btn" type="button" value="Add New"/>
                    </div>;
        } 
     });
@@ -87,6 +84,10 @@
 //    );
 </script>
 
+<% 
+    DBTools db = DBTools();
+    List items = new List();
+%>
 
 </body>
 </html>
