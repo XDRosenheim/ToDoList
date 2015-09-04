@@ -1,6 +1,7 @@
 package dk.ToDoList;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBTools {
 	String connectionURL = "jdbc:mysql://localhost/ToDoList";
@@ -42,4 +43,11 @@ public class DBTools {
 		}
 		return list;
 	}
+        
+        public ArrayList<List> getAllEntries(){
+            
+            
+            
+            return null;
+        }
 }
