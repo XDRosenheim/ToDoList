@@ -17,3 +17,6 @@ web/TestConnection.jsp
 build/web/gfv3ee6.dpf
 build/web/index.jsp
 nbproject/private/private.properties
+build/web/index.jsp
+nbproject/private/private.properties
+src/java/dk/ToDoList/DBTools.java
