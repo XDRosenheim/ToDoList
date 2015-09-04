@@ -15,7 +15,7 @@ public class DBTools {
         
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(connectionURL, "root", "admin");
+			con = DriverManager.getConnection(connectionURL, "root", DatabaseString.password);
 			stmt = con.createStatement();
 			System.out.println("Success.");
 		} catch (SQLException e) {
