@@ -5,7 +5,7 @@
     String user = request.getParameter("username");    
     String pwd = request.getParameter("password");
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ToDoList", "root", DatabaseString.password);
+    Connection con = DriverManager.getConnection(DatabaseString.serverURL, DatabaseString.username, DatabaseString.password);
     Statement st = con.createStatement();
     ResultSet rs;
     rs = st.executeQuery("select * from users where username='" + user + "' and passphrase='" + pwd + "'");
