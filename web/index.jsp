@@ -7,11 +7,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="react-bs/react-bootstrap.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
     <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> <!-- Font awesome! -->
-    <link rel="stylesheet" href="css/bootstrap.css"/>
+    
     <link rel="stylesheet" href="css/style.css"/>
+    
     <title>ToDoList</title>
 </head>
 <body>
@@ -19,10 +21,6 @@
 
 <script type="text/jsx">
      /** @jsx React.DOM */
-    var Button = ReactBootstrap.Button;
-    var ModalTrigger = ReactBootstrap.ModalTrigger;
-    var Modal = ReactBootstrap.Modal;
-
 
     var TodoItems = React.createClass({
         render: function() {
@@ -49,6 +47,7 @@
 								out.println("<h5><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></h5>");
 							}
 						%>
+                                                         
                         </tbody>
                     </table>;
        }
@@ -56,36 +55,30 @@
     
 
     var AddNewModal = React.createClass({
-
-        getInitialState(){
-           return { showModal: false };
-        },
-
-        close(){
-            this.setState({ showModal: false });
-        },
-
-        open(){
-            this.setState({ showModal: true });
-        },  
-        render: function() {
-            return (
-                <div>
-                    <Modal show={this.state.showModal} onRequestHide={this.close}>
-                        <Modal.Header>
-                           <Modal.Title>Add New Todo</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                           hej
-                        </Modal.Body>
-                      <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
-                      </Modal.Footer>
-                    </Modal>
+        render: function () {
+        return  <div>
+                    <button type="button" className="btn btn-primary navbar-left" data-toggle="modal" data-target="#myModal" style={{marign:'2em'}}>
+                      Add New Todo
+                    </button>
+                    <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h4 className="modal-title" id="myModalLabel">Add New Todo</h4>
+                          </div>
+                          <div className="modal-body">
+                            ...
+                          </div>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
-            );
-        }
-    });
+             }
+        });
 
     var BrandStyle = {
         color: '#CC423F',
@@ -98,9 +91,7 @@
            return <div className={this.props.navClass}>
                    <a href="index.jsp" className={this.props.brand} style={BrandStyle}>Todo List</a>
 						<div className="navbar-collapse collapse">
-							<ModalTrigger Modal={<AddNewModal/>}>
-								<Button bsStyle='primary' className="btn btn-primary navbar-left">Add New  <span className="glyphicon glyphicon-plus"></span></Button>
-							</ModalTrigger>
+							 <AddNewModal/>  
 							<%
 								if(session.getAttribute("LoggedIn") == null) { 
 
