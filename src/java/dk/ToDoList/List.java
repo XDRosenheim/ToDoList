@@ -31,7 +31,7 @@ public class List {
 	public int getCategory() {return this.cat;}
         
         @Override
-    public String toString() {
+        public String toString() {
         dato = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("ddd-mmm-yyyy HH:mm");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+2"));

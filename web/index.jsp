@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="dk.ToDoList.DBTools"%>
+<%@ page import="dk.ToDoList.*"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -30,11 +31,44 @@
        }
     });
     
+    
+    var AddNewTodo = React.createClass({
+        render: function() {
+            return <div className="modal-fade" id="addNew">
+                    <div className="modal-dialog">
+                     <div className="modal-content">
+                        <div className="modal-header">
+                          <h4 className="modal-title">Add New TODO</h4>
+                        </div>
+                        <div className="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="text" class="form-control" placeholder="Todo...">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox"> Reminder
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                   </div>
+        }
+    })
+    
     var ToolBar = React.createClass({
        render:function() {
            return <div className={this.props.navClass}>
                         <a href="#" className={this.props.brand}>Todo List</a>
-                        <input className="btn btn-default navbar-btn" type="button" value="Add New"/>
+                        <button className="btn btn-default navbar-btn" type="button" data-toggle="modal" data-target="#addNew">Add New  <span className="glyphicon glyphicon-plus" aria-hidden="true">
+                        </span ></button>
                    </div>;
        } 
     });
@@ -57,8 +91,9 @@
     
 </script>
 
-<% 
+<%
     DBTools db = new DBTools();
+    List ls = db.getAllEntries();
 %>
 
 </body>

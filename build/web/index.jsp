@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="dk.ToDoList.*" %>
+<%@ page import="dk.ToDoList.*"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -30,11 +31,28 @@
        }
     });
     
+    
+    var AddNewTodo = React.createClass({
+        render: function() {
+            return <div className="modal-fade" id="addNew">
+                    <div className="modal-dialog">
+                     <div className="modal-content">
+                        <div className="modal-header">
+                          <h4 className="modal-title">Add New TODO</h4>
+                        </div>
+                        <div className="modal-body"
+                      </div>
+                    </div>
+                   </div>
+        }
+    })
+    
     var ToolBar = React.createClass({
        render:function() {
            return <div className={this.props.navClass}>
                         <a href="#" className={this.props.brand}>Todo List</a>
-                        <input className="btn btn-default navbar-btn" type="button" value="Add New"/>
+                        <button className="btn btn-default navbar-btn" type="button" data-toggle="modal" data-target="#addNew">Add New  <span className="glyphicon glyphicon-plus" aria-hidden="true">
+                        </span ></button>
                    </div>;
        } 
     });
@@ -55,38 +73,11 @@
         document.getElementById('container')
       );
     
-
-
-//
-//    var TodoTabel = React.createClass({
-//        render: function() {
-//            return <tabel className={this.props.tblClass}>
-//                    <thead><tr><th><h3>Todo List</h3><th></tr></thead>
-//                        <TodoItems/>
-//                    </tabel>;
-//
-//        }
-//    });
-//
-    
-//
-//    var ToolBar = React.createClass({
-//        render: function() {
-//            return <div className={this.props.navClass}>
-//                    <a href="#" className={this.props.brand}>Todo List</a>
-//                   </div>;
-//        }
-//    });
-//
-//    React.render(
-//            <Main/>,
-//    document.getElementById('container')
-//    );
 </script>
 
-<% 
-    DBTools db = DBTools();
-    List items = new List();
+<%
+    DBTools db = new DBTools();
+    List ls = db.getAllEntries();
 %>
 
 </body>
