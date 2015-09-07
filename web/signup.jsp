@@ -20,12 +20,13 @@
 					<tr>
 						<th colspan="2">Enter Information Here</th>
 					</tr>
-					<input name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
+                                        <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="" pattern="[A-Za-z]{3}" >
 					<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
 					<input name="passwordAgain"type="password" id="inputPasswordAgain" class="form-control" placeholder="Confirm Password" required="">
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
 					<a href="login.jsp">Login Here</a>
 				</table>
+                            
 			</form>
 		</div>
     </body>
