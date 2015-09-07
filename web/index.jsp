@@ -54,7 +54,7 @@
     var AddNewModal = React.createClass({
         render: function () {
         return  <div>
-                    <button type="button" className="btn btn-primary navbar-left" data-toggle="modal" data-target="#myModal" style={{marign:'2em'}}>
+                    <button type="button" className="btn btn-primary btn-lg navbar-left" data-toggle="modal" data-target="#myModal" style={{marign:'2em'}}>
                       Add New Todo
                     </button>
                     <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,15 +64,15 @@
                             <h4 className="modal-title" id="myModalLabel">Add New Todo</h4>
                           </div>
                           <div className="modal-body">
-                            <form>
+                            <form method="post" action="loggingin.jsp">
                               <input name="ToDoText" type="text" id="inputText" class="form-control" placeholder="Your text here" required="" autofocus="" />
                               <br />
-                              <input type="checkbox" value="reminder" /><span> Remind me about this.</span>
+                              <input name="remind" type="checkbox" value="reminder" /><span> Remind me about this.</span>
                             </form>
                           </div>
                           <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" className="btn btn-primary">Save</button>
                           </div>
                         </div>
                       </div>
@@ -96,13 +96,13 @@
                         <%
                             if(session.getAttribute("LoggedIn") == null) { 
                                 out.print("<form method=\"post\" action=\"login.jsp\">"
-                                        + "<button className=\"btn btn-primary navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Login"
+                                        + "<button className=\"btn btn-primary btn-lg navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Login"
                                         + "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
                                         + "</form>");
                             }
                             else {
                                 out.print("<form method=\"post\" action=\"logginout.jsp\">"
-                                        + "<button className=\"btn btn-primary navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Logout"
+                                        + "<button className=\"btn btn-primary btn-lg navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Logout"
                                         + "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
                                         + "</form>");
                             }
