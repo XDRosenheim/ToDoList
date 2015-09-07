@@ -33,7 +33,9 @@
        render:function() {
            return <div className={this.props.navClass}>
                         <a href="#" className={this.props.brand}>Todo List</a>
-                        <input className="btn btn-default navbar-btn" type="button" value="Add New"/>
+                        <button className="btn btn-primary navbar-btn" type="button" data-toggle="modal" data-target="#addNewModal">Add New    <span className="glyphicon glyphicon-plus" aria-hidden="truw">
+                        </span></button>
+                        
                    </div>;
        } 
     });
