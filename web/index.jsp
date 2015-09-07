@@ -29,12 +29,27 @@
         render: function() {
             return <table className="table">
                         <tbody>
-                            <tr><td><h4>Text1</h4></td></tr>
-                            <tr><td><h4>Text2</h4></td></tr>
-                            <tr><td><h4>Text3</h4></td></tr>
-                            <tr><td><h4>Text4</h4></td></tr>
-                         </tbody>
-                    </table>
+                            <% 
+							if(session.getAttribute("LoggedIn") != null) { 
+								Connection con = DriverManager.getConnection(
+									DatabaseString.Driver + ":" +
+										DatabaseString.Protocol + ":" +
+										DatabaseString.serverURL,
+									DatabaseString.username,
+									DatabaseString.password);
+								Statement stmt = con.createStatement();
+								ResultSet rs = stmt.executeQuery("SELECT textToDo, cat FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
+								
+								while (rs.next()) {
+									out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4></td></tr>");
+								}
+							}
+							else {
+								out.println("<p><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></p>");
+							}
+						%>
+                        </tbody>
+                    </table>;
        }
     });
        
@@ -82,30 +97,7 @@
         }
     });
 
-
-						<% 
-							if(session.getAttribute("LoggedIn") != null) { 
-								Connection con = DriverManager.getConnection(
-									DatabaseString.Driver + ":" +
-										DatabaseString.Protocol + ":" +
-										DatabaseString.serverURL,
-									DatabaseString.username,
-									DatabaseString.password);
-								Statement stmt = con.createStatement();
-								ResultSet rs = stmt.executeQuery("SELECT textToDo FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
-								
-								while (rs.next()) {
-									out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4></td></tr>");
-								}
-							}
-							else {
-								out.println("<p><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></p>");
-							}
-						%>
-                        </tbody>
-                    </table>;
-       }
-    });
+						
     
 //    var ModalAddNewControl = React.createClass({
 //        getInitialState(){
