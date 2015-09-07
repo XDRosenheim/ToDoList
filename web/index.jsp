@@ -96,18 +96,13 @@
        render: function() {
            return <div className={this.props.navClass}>
 
-                        <a href="#" className={this.props.brand}>Todo List</a>
+            
+
+                        <a href="index.jsp" className={this.props.brand}>Todo List</a>
 						<div class="navbar-collapse collapse">
 							<ModalTrigger modal={<AddNewModal/>}>
                                                         <Button bsStyle='primary'>Add New   <span className="glyphicon glyphicon-plus"></span></Button>
                                                         </ModalTrigger>
-								
-
-                        <a href="index.jsp" className={this.props.brand}>Todo List</a>
-                        <ModalAddNewControl btnClass="btn btn-primary"/>
-						<div class="navbar-collapse collapse">
-							<button className="btn btn-primary navbar-btn navbar-left" type="button" data-toggle="modal" data-target="#addNewModal">Add New    <span className="glyphicon glyphicon-plus" aria-hidden="true">
-							</span></button>
 							
                                                         <%
 								if(session.getAttribute("LoggedIn") == null){ 
