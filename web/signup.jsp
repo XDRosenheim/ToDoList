@@ -1,9 +1,3 @@
-<%-- 
-    Document   : signup
-    Created on : 03-09-2015, 12:53:17
-    Author     : HVF-E308
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,7 +19,6 @@
 					if(session.getAttribute("UserExists") != null){
 						out.println("<p>" + session.getAttribute("UserExists").toString() + "</p>");
 						session.setAttribute("UserExists", null);
-						
 					}
 					else if (session.getAttribute("PassStupid") != null){
 						out.println("<p>" + session.getAttribute("PassStupid").toString() + "</p>");
