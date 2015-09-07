@@ -8,9 +8,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="react-bs/react-bootstrap.min.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> <!-- Font awesome! -->
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> <!-- Font awesome! -->
     <link rel="stylesheet" href="css/bootstrap.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
     <title>ToDoList</title>
 </head>
 <body>
@@ -21,23 +22,14 @@
     var Button = ReactBootstrap.Button;
     var ModalTrigger = ReactBootstrap.ModalTrigger;
     var Modal = ReactBootstrap.Modal;
-<<<<<<< HEAD
-    
-=======
->>>>>>> origin/master
+
 
     var TodoItems = React.createClass({
         render: function() {
             return <table className="table">
                         <tbody>
-<<<<<<< HEAD
-
-                                                <% 
-                      
-
-=======
 						<% 
->>>>>>> origin/master
+
 							if(session.getAttribute("LoggedIn") != null) { 
 								Connection con = DriverManager.getConnection(
 									DatabaseString.Driver + ":" +
@@ -47,20 +39,14 @@
 									DatabaseString.password);
 								Statement stmt = con.createStatement();
 
-<<<<<<< HEAD
-								ResultSet rs = stmt.executeQuery("SELECT textToDo FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
-=======
 								ResultSet rs = stmt.executeQuery("SELECT textToDo, cat FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
-								
-								
->>>>>>> origin/master
-								
+
 								while (rs.next()) {
 									out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4></td></tr>");
 								}
 							}
 							else {
-								out.println("<p><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></p>");
+								out.println("<h5><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></h5>");
 							}
 						%>
                         </tbody>
@@ -68,34 +54,24 @@
        }
     });
     
-<<<<<<< HEAD
+
     var AddNewModal = React.createClass({
-=======
-    const AddNewModal = React.createClass({
->>>>>>> origin/master
 
-    getInitialState(){
-       return { showModal:false };
-   },
+        getInitialState(){
+           return { showModal: false };
+        },
 
-   close(){
-       this.setState({ showModal:false });
-   },
+        close(){
+            this.setState({ showModal: false });
+        },
 
-   open(){
-       this.setState({ showModal:true });
-   },  
-<<<<<<< HEAD
+        open(){
+            this.setState({ showModal: true });
+        },  
         render: function() {
             return (
                 <div>
                     <Modal show={this.state.showModal} onRequestHide={this.close}>
-=======
-        render() {
-            return (
-                <div>
-                    <Modal show={this.state.showModal} onHide={this.close}>
->>>>>>> origin/master
                         <Modal.Header>
                            <Modal.Title>Add New Todo</Modal.Title>
                         </Modal.Header>
@@ -110,37 +86,24 @@
             );
         }
     });
-<<<<<<< HEAD
 
-					
-						
- 
-=======
->>>>>>> origin/master
+    var BrandStyle = {
+        color: '#CC423F',
+        fontFamily: 'Lobster',
+        fontSize: '32px'
+    };
     
     var ToolBar = React.createClass({
        render: function() {
            return <div className={this.props.navClass}>
-
-            
-
-                        <a href="index.jsp" className={this.props.brand}>Todo List</a>
-<<<<<<< HEAD
+                   <a href="index.jsp" className={this.props.brand} style={BrandStyle}>Todo List</a>
 						<div className="navbar-collapse collapse">
-							<ModalTrigger modal={<AddNewModal/>}>
-                                                            <Button bsStyle='primary'>Add New   <span className="glyphicon glyphicon-plus"></span></Button>
-                                                        </ModalTrigger>
-							
-                                                        <%
-								if(session.getAttribute("LoggedIn") == null){ 
-=======
-						<div class="navbar-collapse collapse">
-							<ModalTrigger modal={<AddNewModal/>}>
-								<Button bsStyle='primary' className="btn btn-primary navbar-left">Add New<span className="glyphicon glyphicon-plus"></span></Button>
+							<ModalTrigger Modal={<AddNewModal/>}>
+								<Button bsStyle='primary' className="btn btn-primary navbar-left">Add New  <span className="glyphicon glyphicon-plus"></span></Button>
 							</ModalTrigger>
 							<%
 								if(session.getAttribute("LoggedIn") == null) { 
->>>>>>> origin/master
+
 									out.print("<form method=\"post\" action=\"login.jsp\">"
 											+ "<button className=\"btn btn-primary navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Login"
 											+ "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
@@ -154,7 +117,7 @@
 								}
 							%>
 						</div>
-                   </div>;
+                                            </div>;
             } 
     });
     
@@ -173,7 +136,7 @@
       );
     
 </script>
-<<<<<<< HEAD
+
 
 <% 
 
@@ -188,7 +151,7 @@
     //List ls = db.getToDoById(1);
 %>
 
-=======
->>>>>>> origin/master
+
+
 </body>
 </html>
