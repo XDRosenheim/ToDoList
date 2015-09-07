@@ -39,5 +39,7 @@
 		con.close();
 	} catch (SQLException e) {
 		out.println("SQL Error: " + e);
+	} catch (Exception e){
+		out.println("Error: " + e);
 	}
 %>
