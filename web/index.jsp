@@ -8,6 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="react-bs/react-bootstrap.min.js" type="text/javascript"></script>
+    
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <title>ToDoList</title>
 </head>
@@ -29,25 +31,34 @@
        }
     });
     
-    var ModalAddNew = React.createClass({
-        render: function() {
-            return <div class="modal fade">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                              <h4 class="modal-title">Modal title</h4>
-                            </div>
-                            <div class="modal-body">
-                              <p>One fine body&hellip;</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                          </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                      </div><!-- /.modal -->
+    var ModalAddNewControl = React.createClass({
+        getInitialState(){
+            return { showModal:false};
+        },
+        
+        close(){
+            this.setState({showModal:false});
+        },
+        
+        open(){
+            this.setState({showModal:true});
+        },
+        render() {
+            return (
+                <div>
+                   <Button bsStyle='primary' onClick={this.state.open}>
+                       Add New  <span className="glyphicon glyphicon-plus" aria-hidden="true">
+                        </span>
+                    </Button>
+                    
+                    <Modal show={this.state.showModal} onHide={this.close}>
+                        <Modal.Header closeButton>
+                           <Modal.Title>Add New Todo</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            
+                
+            )
         }
     })
     
@@ -84,6 +95,9 @@
     if (session.getAttribute("LoggedIn") != null){
 		out.println("Test");
 	}
+    
+    DBTools db = new DBTools();
+    List ls = db.getToDoById(1);
 %>
 
 </body>
