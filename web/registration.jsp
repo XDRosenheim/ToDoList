@@ -28,14 +28,15 @@
                         out.println("User already exists.");
                         out.println("<a href=\"signup.jsp\">Try again.</a>");
                     }
-
-                    int i = st.executeUpdate("insert into users values (NULL, '" + user + "','" + pwd + "');");
-                    if (i > 0) {
-                        response.sendRedirect("login.jsp");
-                    } else {
-                            System.out.println("Error.... Unknown");
-                            out.println("<a href=\"signup.jsp\">Try again.</a>");
-                    }
+					else {
+						int i = st.executeUpdate("insert into users values (NULL, '" + user + "','" + pwd + "');");
+						if (i > 0) {
+							response.sendRedirect("login.jsp");
+						} else {
+								System.out.println("Error.... Unknown");
+								out.println("<a href=\"signup.jsp\">Try again.</a>");
+						}
+					}
                     con.close();
                 } catch (SQLException e) {
                     out.println("SQL Error: " + e);
