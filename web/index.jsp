@@ -2,7 +2,6 @@
 <%@ page import="dk.ToDoList.DBTools"%>
 <%@ page import="dk.ToDoList.List" %>
 
-<!DOCTYPE html>
 <html>
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
@@ -17,6 +16,13 @@
 <div id="container"></div>
 
 <script type="text/jsx">
+    var React = require('react');
+    var ReactBootstrap = require('react-bootstrap');
+    var Button = ReactBootstrap.Button;
+    var Modal = ReactBootstrap.Modal;
+    
+    
+    
     /** @jsx React.DOM */
     var TodoItems = React.createClass({
         render: function() {
@@ -27,50 +33,63 @@
                             <tr><td><h4>Text3</h4></td></tr>
                             <tr><td><h4>Text4</h4></td></tr>
                          </tbody>
-                    </table>;
+                    </table>
        }
     });
-    
-    var ModalAddNewControl = React.createClass({
-        getInitialState(){
-            return { showModal:false};
+       
+    const ModalTrigger = React.createClass({
+        
+         
+
+         getInitialState(){
+            return { showModal:false };
         },
         
         close(){
-            this.setState({showModal:false});
+            this.setState({ showModal:false });
         },
         
         open(){
-            this.setState({showModal:true});
+            this.setState({ showModal:true });
         },
+        
         render() {
             return (
                 <div>
-                   <Button bsStyle='primary' onClick={this.state.open}>
-                       Add New  <span className="glyphicon glyphicon-plus" aria-hidden="true">
-                        </span>
-                    </Button>
+               
+                    <Button bsStyle='primary' onClick={this.state.open}>Add New</Button>
                     
                     <Modal show={this.state.showModal} onHide={this.close}>
-                        <Modal.Header closeButton>
+                        <Modal.Header>
                            <Modal.Title>Add New Todo</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            
-                
-            )
+                            <form>
+                              <div className="form-group">
+                                <input type="text" className="form-control" placeholder="Todo..."/>
+                              </div>
+                              <div className="checkbox">
+                                <label>
+                                  <input type="checkbox"/>
+                                </label>
+                              </div>
+                            </form>
+                        </Modal.Body>
+                    </Modal>
+                </div>
+            );
         }
-    })
+    });
+
+
     
     var ToolBar = React.createClass({
-       render:function() {
+       render: function() {
            return <div className={this.props.navClass}>
                         <a href="#" className={this.props.brand}>Todo List</a>
-                        <button className="btn btn-primary navbar-btn" type="button" data-toggle="modal" data-target="#addNewModal">Add New    <span className="glyphicon glyphicon-plus" aria-hidden="truw">
-                        </span></button>
-                        
+                        <ModalAddNewControl btnClass="btn btn-primary"/>
                    </div>;
-       } 
+            } 
     });
     
     
@@ -82,7 +101,6 @@
                    </div>;
         }
     });
-    
     
      React.render(
         <Main/>,
@@ -96,8 +114,8 @@
 		out.println("Test");
 	}
     
-    DBTools db = new DBTools();
-    List ls = db.getToDoById(1);
+    //DBTools db = new DBTools();
+    //List ls = db.getToDoById(1);
 %>
 
 </body>
