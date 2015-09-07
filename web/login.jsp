@@ -18,13 +18,22 @@
             <link rel="stylesheet" href="css/bootstrap.css" />
             <link rel="stylesheet" href="css/style.css" />
         <title>ToDoList</title>
+        <script>
+            function keyispressed(e){
+                var charval= String.fromCharCode(e.keyCode);
+                if(isNaN(charval)){
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body style="background-color: lightgray" >
         <div class="container">
             <form class="form-signin" method="post" action="loggingin.jsp">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <label for="inputEmail" class="sr-only">Username</label>
-                <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+                <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" onkeypress="keyispressed()" pattern="[A-Za-z]{3}">
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                 <%
