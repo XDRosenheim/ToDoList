@@ -12,9 +12,12 @@
 	}
 	else {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection(DatabaseString.Driver + ":" +
-                        DatabaseString.Protocol + ":" + 
-                        DatabaseString.serverURL, DatabaseString.username, DatabaseString.password);
+		Connection con = DriverManager.getConnection(
+				DatabaseString.Driver + ":" + 
+					DatabaseString.Protocol + ":" + 
+                    DatabaseString.serverURL, 
+				DatabaseString.username, 
+				DatabaseString.password);
 		Statement st = con.createStatement();
 
 		ResultSet rs;
