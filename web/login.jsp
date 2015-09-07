@@ -39,15 +39,16 @@
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                 <%
-					if(session.getAttribute("WrongUserPass") != null){
-						out.println("<p>" + session.getAttribute("WrongUserPass").toString() + "</p>");
-						session.setAttribute("WrongUserPass", null);
-					}
-					else {
-						out.println("<br />");
-					}
-				%>
+                    if(session.getAttribute("WrongUserPass") != null){
+                        out.println("<p>" + session.getAttribute("WrongUserPass").toString() + "</p>");
+                        session.setAttribute("WrongUserPass", null);
+                    }
+                    else {
+                        out.println("<br />");
+                    }
+                %>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                <a href="signup.jsp">Don't have an account?</a>
             </form>
         </div>
     </body>
