@@ -14,9 +14,10 @@
 				DatabaseString.password);
 		Statement st = con.createStatement();
 		ResultSet rs;
-		rs = st.executeQuery("select * from users where username='" + user + "' and passphrase='" + pwd + "'");
+		rs = st.executeQuery("select ID from users where username='" + user + "' and passphrase='" + pwd + "'");
 		if (rs.next()) {
 			session.setAttribute("LoggedIn", user);
+			session.setAttribute("LoggedInID", rs.getInt("ID"));
 			response.sendRedirect("index.jsp");
 		} else {
 			session.setAttribute("WrongUserPass", "Username or password is wrong.");

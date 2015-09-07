@@ -20,20 +20,20 @@
 		rs = st.executeQuery("select * from users where username='" + user + "'");
 	
 		if (rs.next()){ // Does the user already exsist in the database?
-			out.println("User already exists.");
-			out.println("<a href=\"signup.jsp\">Try again.</a>");
+			session.setAttribute("UserExists", "That username is already in use.");
+			response.sendRedirect("signup.jsp");
 		}
 		else if (!pwd.toString().equals(pwdAgain)){ // Are the passwords the same?
-			out.println("Passwords are not the same."); 
-            out.println("<a href=\"signup.jsp\">Try again.</a>");
+			session.setAttribute("PassStupid", "Passwords are not the same.");
+			response.sendRedirect("signup.jsp");
 		}
 		else { // If all is good, make user and go to login.
 			int i = st.executeUpdate("insert into users values (NULL, '" + user + "','" + pwd + "');");
 			if (i > 0) {
 				response.sendRedirect("login.jsp");
 			} else {
-				System.out.println("Error.... Unknown");
-				out.println("<a href=\"signup.jsp\">Try again.</a>");
+				System.out.println("Error.... Unknown....");
+				out.println("<a href=\"signup.jsp\">Try again?</a>");
 			}
 		}
 		con.close();
