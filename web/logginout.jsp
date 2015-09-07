@@ -1,4 +1,4 @@
 <%
-	session.setAttribute("LoggedIn", null);
+	session.invalidate();
 	response.sendRedirect("index.jsp");
 %>

@@ -6,8 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% //Go to index if logged in.
-    if (session.getAttribute("LoggedName") != null) {
+<% // Go to index if logged in.
+    if (session.getAttribute("LoggedIn") != null) {
         response.sendRedirect("index.jsp");
     }
 %>
@@ -27,8 +27,16 @@
                 <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-                <br />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                <%
+					if(session.getAttribute("WrongUserPass") != null){
+						out.println("<p>" + session.getAttribute("WrongUserPass").toString() + "</p>");
+						
+					}
+					else {
+						out.println("<br />");
+					}
+				%>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
             </form>
         </div>
     </body>

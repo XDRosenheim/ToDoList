@@ -19,8 +19,8 @@
 			session.setAttribute("LoggedIn", user);
 			response.sendRedirect("index.jsp");
 		} else {
-			out.println("Username or password is wrong.");
-			out.println("<a href='login.jsp'>try again</a>");
+			session.setAttribute("WrongUserPass", "Username or password is wrong.");
+			response.sendRedirect("login.jsp");
 		}
 	} catch (SQLException e) {
 		out.println("SQL Error: " + e);
