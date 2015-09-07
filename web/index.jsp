@@ -1,11 +1,6 @@
 <%@page import="java.sql.*"%>
-<%@page import="dk.ToDoList.DatabaseString"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="dk.ToDoList.DBTools"%>
-<%@page import="dk.ToDoList.List" %>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@page import="dk.ToDoList.*"%>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
@@ -32,7 +27,10 @@
         render: function() {
             return <table className="table">
                         <tbody>
-                        	<% 
+
+                                                <% 
+                      
+
 							if(session.getAttribute("LoggedIn") != null) { 
 								Connection con = DriverManager.getConnection(
 									DatabaseString.Driver + ":" +
@@ -41,6 +39,7 @@
 									DatabaseString.username,
 									DatabaseString.password);
 								Statement stmt = con.createStatement();
+
 								ResultSet rs = stmt.executeQuery("SELECT textToDo FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
 								
 								while (rs.next()) {
@@ -55,7 +54,6 @@
                     </table>;
        }
     });
-       
     
     const AddNewModal = React.createClass({
 
@@ -91,18 +89,27 @@
     
 
 					
-    
-
+						
+ 
     
     var ToolBar = React.createClass({
        render: function() {
            return <div className={this.props.navClass}>
+
                         <a href="#" className={this.props.brand}>Todo List</a>
 						<div class="navbar-collapse collapse">
 							<ModalTrigger modal={<AddNewModal/>}>
                                                         <Button bsStyle='primary'>Add New   <span className="glyphicon glyphicon-plus"></span></Button>
                                                         </ModalTrigger>
-							<%	
+								
+
+                        <a href="index.jsp" className={this.props.brand}>Todo List</a>
+                        <ModalAddNewControl btnClass="btn btn-primary"/>
+						<div class="navbar-collapse collapse">
+							<button className="btn btn-primary navbar-btn navbar-left" type="button" data-toggle="modal" data-target="#addNewModal">Add New    <span className="glyphicon glyphicon-plus" aria-hidden="true">
+							</span></button>
+							
+                                                        <%
 								if(session.getAttribute("LoggedIn") == null){ 
 									out.print("<form method=\"post\" action=\"login.jsp\">"
 											+ "<button className=\"btn btn-primary navbar-btn navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">"
@@ -145,6 +152,9 @@
 		out.println("Test");
 	}
     
+
+
+
     //DBTools db = new DBTools();
     //List ls = db.getToDoById(1);
 %>
