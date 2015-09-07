@@ -22,75 +22,17 @@
 <div id="container"></div>
 
 <script type="text/jsx">
-    var React = require('react');
-    var ReactBootstrap = require('react-bootstrap');
+     /** @jsx React.DOM */
     var Button = ReactBootstrap.Button;
+    var ModalTrigger = ReactBootstrap.ModalTrigger;
     var Modal = ReactBootstrap.Modal;
     
-    
-    
-    /** @jsx React.DOM */
+
     var TodoItems = React.createClass({
         render: function() {
             return <table className="table">
                         <tbody>
-<<<<<<< HEAD
-                            <tr><td><h4>Text1</h4></td></tr>
-                            <tr><td><h4>Text2</h4></td></tr>
-                            <tr><td><h4>Text3</h4></td></tr>
-                            <tr><td><h4>Text4</h4></td></tr>
-                         </tbody>
-                    </table>
-       }
-    });
-       
-    const ModalTrigger = React.createClass({
-        
-         
-
-         getInitialState(){
-            return { showModal:false };
-        },
-        
-        close(){
-            this.setState({ showModal:false });
-        },
-        
-        open(){
-            this.setState({ showModal:true });
-        },
-        
-        render() {
-            return (
-                <div>
-               
-                    <Button bsStyle='primary' onClick={this.state.open}>Add New</Button>
-                    
-                    <Modal show={this.state.showModal} onHide={this.close}>
-                        <Modal.Header>
-                           <Modal.Title>Add New Todo</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <form>
-                              <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Todo..."/>
-                              </div>
-                              <div className="checkbox">
-                                <label>
-                                  <input type="checkbox"/>
-                                </label>
-                              </div>
-                            </form>
-                        </Modal.Body>
-                    </Modal>
-                </div>
-            );
-        }
-    });
-
-
-=======
-						<% 
+                        	<% 
 							if(session.getAttribute("LoggedIn") != null) { 
 								Connection con = DriverManager.getConnection(
 									DatabaseString.Driver + ":" +
@@ -113,50 +55,53 @@
                     </table>;
        }
     });
+       
     
-//    var ModalAddNewControl = React.createClass({
-//        getInitialState(){
-//            return { showModal:false};
-//        },
-//        
-//        close(){
-//            this.setState({showModal:false});
-//        },
-//       
-//       
-//        open(){
-//            this.setState({showModal:true});
-//        },
-//        render() {
-//            return (
-//                <div>
-//                   <Button bsStyle='primary' onClick={this.state.open}>
-//                       Add New  <span className="glyphicon glyphicon-plus" aria-hidden="true">
-//                        </span>
-//                    </Button>
-//                    
-//                    <Modal show={this.state.showModal} onHide={this.close}>
-//                        <Modal.Header closeButton>
-//                           <Modal.Title>Add New Todo</Modal.Title>
-//                        </Modal.Header>
-//                        <Modal.Body>
-//                            
-//                
-//            );
-//        }
-//    });
->>>>>>> origin/master
+    const AddNewModal = React.createClass({
+
+    getInitialState(){
+       return { showModal:false };
+   },
+
+   close(){
+       this.setState({ showModal:false });
+   },
+
+   open(){
+       this.setState({ showModal:true });
+   },  
+        render() {
+            return (
+                <div>
+                    <Modal show={this.state.showModal} onHide={this.close}>
+                        <Modal.Header>
+                           <Modal.Title>Add New Todo</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                           hej
+                        </Modal.Body>
+                      <Modal.Footer>
+                        <Button onClick={this.close}>Close</Button>
+                      </Modal.Footer>
+                    </Modal>
+                </div>
+            );
+        }
+    });
+    
+
+					
+    
+
     
     var ToolBar = React.createClass({
        render: function() {
            return <div className={this.props.navClass}>
                         <a href="#" className={this.props.brand}>Todo List</a>
-<<<<<<< HEAD
-                        <ModalAddNewControl btnClass="btn btn-primary"/>
-=======
 						<div class="navbar-collapse collapse">
-							<button className="btn btn-primary navbar-btn navbar-left" type="button" data-toggle="modal" data-target="#addNewModal">Add New    <span className="glyphicon glyphicon-plus" aria-hidden="true">
-							</span></button>
+							<ModalTrigger modal={<AddNewModal/>}>
+                                                        <Button bsStyle='primary'>Add New   <span className="glyphicon glyphicon-plus"></span></Button>
+                                                        </ModalTrigger>
 							<%	
 								if(session.getAttribute("LoggedIn") == null){ 
 									out.print("<form method=\"post\" action=\"login.jsp\">"
@@ -174,7 +119,6 @@
 								}
 							%>
 						</div>
->>>>>>> origin/master
                    </div>;
             } 
     });
@@ -196,13 +140,11 @@
 </script>
 
 <% 
-<<<<<<< HEAD
+
     if (session.getAttribute("LoggedIn") != null){
 		out.println("Test");
 	}
     
-=======
->>>>>>> origin/master
     //DBTools db = new DBTools();
     //List ls = db.getToDoById(1);
 %>
