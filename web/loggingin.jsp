@@ -16,7 +16,7 @@
     rs = st.executeQuery("select * from users where username='" + user + "' and passphrase='" + pwd + "'");
     if (rs.next()) {
         session.setAttribute("LoggedIn", user);
-        response.sendRedirect("success.jsp");
+        response.sendRedirect("index.jsp");
     } else {
 		out.println("Username or password is wrong.");
         out.println("<a href='login.jsp'>try again</a>");

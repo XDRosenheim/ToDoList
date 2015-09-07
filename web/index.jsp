@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="dk.ToDoList.DBTools"%>
+<%@ page import="dk.ToDoList.List" %>
 
 <!DOCTYPE html>
 <html>
@@ -12,8 +13,6 @@
 </head>
 <body>
 <div id="container"></div>
-
-
 
 <script type="text/jsx">
     /** @jsx React.DOM */
@@ -58,7 +57,9 @@
 </script>
 
 <% 
-    DBTools db = new DBTools();
+    if (session.getAttribute("LoggedIn") != null){
+		out.println("Test");
+	}
 %>
 
 </body>
