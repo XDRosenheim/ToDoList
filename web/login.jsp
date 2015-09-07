@@ -30,6 +30,7 @@
                 <%
 					if(session.getAttribute("WrongUserPass") != null){
 						out.println("<p>" + session.getAttribute("WrongUserPass").toString() + "</p>");
+						session.setAttribute("WrongUserPass", null);
 						
 					}
 					else {
