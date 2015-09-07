@@ -1,11 +1,6 @@
 <%@page import="java.sql.*"%>
-<%@page import="dk.ToDoList.DatabaseString"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="dk.ToDoList.DBTools"%>
-<%@page import="dk.ToDoList.List" %>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@page import="dk.ToDoList.*"%>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
@@ -34,7 +29,6 @@
         render: function() {
             return <table className="table">
                         <tbody>
-<<<<<<< HEAD
                             <tr><td><h4>Text1</h4></td></tr>
                             <tr><td><h4>Text2</h4></td></tr>
                             <tr><td><h4>Text3</h4></td></tr>
@@ -89,7 +83,6 @@
     });
 
 
-=======
 						<% 
 							if(session.getAttribute("LoggedIn") != null) { 
 								Connection con = DriverManager.getConnection(
@@ -145,19 +138,16 @@
 //            );
 //        }
 //    });
->>>>>>> origin/master
     
     var ToolBar = React.createClass({
        render: function() {
            return <div className={this.props.navClass}>
-                        <a href="#" className={this.props.brand}>Todo List</a>
-<<<<<<< HEAD
+                        <a href="index.jsp" className={this.props.brand}>Todo List</a>
                         <ModalAddNewControl btnClass="btn btn-primary"/>
-=======
 						<div class="navbar-collapse collapse">
 							<button className="btn btn-primary navbar-btn navbar-left" type="button" data-toggle="modal" data-target="#addNewModal">Add New    <span className="glyphicon glyphicon-plus" aria-hidden="true">
 							</span></button>
-							<%	
+							<%
 								if(session.getAttribute("LoggedIn") == null){ 
 									out.print("<form method=\"post\" action=\"login.jsp\">"
 											+ "<button className=\"btn btn-primary navbar-btn navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">"
@@ -174,7 +164,6 @@
 								}
 							%>
 						</div>
->>>>>>> origin/master
                    </div>;
             } 
     });
@@ -195,14 +184,7 @@
     
 </script>
 
-<% 
-<<<<<<< HEAD
-    if (session.getAttribute("LoggedIn") != null){
-		out.println("Test");
-	}
-    
-=======
->>>>>>> origin/master
+<%
     //DBTools db = new DBTools();
     //List ls = db.getToDoById(1);
 %>
