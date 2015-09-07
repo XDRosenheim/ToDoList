@@ -24,7 +24,7 @@
 		rs = st.executeQuery("select * from users where username='" + user + "'");
 		
                 try {
-                    if (rs.next()){
+                    if (!rs.next()){
                         out.println("User already exists.");
                         out.println("<a href=\"signup.jsp\">Try again.</a>");
                     }
