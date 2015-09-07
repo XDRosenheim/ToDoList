@@ -5,7 +5,7 @@
     String user = request.getParameter("username");
     String pwd = request.getParameter("password");
 	String pwdAgain = request.getParameter("passwordAgain");
-	
+
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection(
@@ -17,7 +17,7 @@
 		Statement st = con.createStatement();
 
 		ResultSet rs;
-		rs = st.executeQuery("select * from users where username='" + user + "'");
+		rs = st.executeQuery("select * from users where username='" + user.toLowerCase() + "'");
 	
 		if (rs.next()){ // Does the user already exsist in the database?
 			session.setAttribute("UserExists", "That username is already in use.");
@@ -28,7 +28,7 @@
 			response.sendRedirect("signup.jsp");
 		}
 		else { // If all is good, make user and go to login.
-			int i = st.executeUpdate("insert into users values (NULL, '" + user + "','" + pwd + "');");
+			int i = st.executeUpdate("insert into users values (NULL, '" + user.toLowerCase() + "','" + pwd + "');");
 			if (i > 0) {
 				response.sendRedirect("login.jsp");
 			} else {

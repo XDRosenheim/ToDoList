@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% // Go to index if logged in.
+<% // Go to index if already logged in.
     if (session.getAttribute("LoggedIn") != null) {
         response.sendRedirect("index.jsp");
     }
@@ -33,14 +33,17 @@
             <form class="form-signin" method="post" action="loggingin.jsp">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <label for="inputEmail" class="sr-only">Username</label>
+<<<<<<< HEAD
                 <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="" >
+=======
+                <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
+>>>>>>> origin/master
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                 <%
 					if(session.getAttribute("WrongUserPass") != null){
 						out.println("<p>" + session.getAttribute("WrongUserPass").toString() + "</p>");
 						session.setAttribute("WrongUserPass", null);
-						
 					}
 					else {
 						out.println("<br />");
