@@ -1,3 +1,4 @@
+<%@page import="dk.ToDoList.DatabaseString"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.io.*" %>
 <html>
@@ -9,7 +10,7 @@
 <%
 try {
     String connectionURL = "jdbc:mysql://localhost/ToDoList";
-	Connection connection = DriverManager.getConnection(connectionURL, "root", "admin");
+	Connection connection = DriverManager.getConnection(connectionURL, DatabaseString.username, DatabaseString.password);
     if(!connection.isClosed())
         connection.close();
     }catch(Exception ex){
