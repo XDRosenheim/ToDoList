@@ -9,7 +9,7 @@
 <%
 try {
     String connectionURL = "jdbc:mysql://localhost/ToDoList";
-	Connection connection = DriverManager.getConnection(connectionURL, "root", "rootPassword");
+	Connection connection = DriverManager.getConnection(connectionURL, "root", "admin");
     if(!connection.isClosed())
         connection.close();
     }catch(Exception ex){
