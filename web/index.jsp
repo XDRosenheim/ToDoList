@@ -1,4 +1,5 @@
 <%@page import="java.sql.*"%>
+<%@page import="java.util.Date"%>
 <%@page import="dk.ToDoList.*"%>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -57,21 +58,42 @@
     var AddNewModal = React.createClass({
         render: function () {
         return  <div>
-                    <button type="button" className="btn btn-primary navbar-left" data-toggle="modal" data-target="#myModal" style={{marign:'2em'}}>
-                      Add New Todo
+                    <button type="button" className="btn btn-primary navbar-left" data-toggle="modal" data-target="#myModal">
+                        Add New Todo  <span className="glyphicon glyphicon-plus"></span>
                     </button>
-                    <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" ariaLabelledBy="myModalLabel" ariaHidden="true">
                       <div className="modal-dialog">
                         <div className="modal-content">
                           <div className="modal-header">
                             <h4 className="modal-title" id="myModalLabel">Add New Todo</h4>
                           </div>
                           <div className="modal-body">
-                            ...
+                                <div className="form-group">
+                                  <input id="content" name="content" type="text" className="form-control" placeholder="Todo..."/>
+                                </div>
+                                <div className="checkbox">
+                                  <label>
+                                    <input type="checkbox"/> Reminder
+                                  </label>
+                                </div>
                           </div>
                           <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save</button>
+                             
+                            <input type="submit" id="saveTodo" name="saveTodo" className="btn btn-primary" value="Save" data-dismiss="modal"/>
+                            <%
+                                if (session.getAttribute("LoggedIn") != null){
+                                    if (request.getParameter("saveTodo") != null){
+                                    String content = request.getParameter("content");
+                                    int id = Integer.parseInt((session.getAttribute("LoggedInId").toString()));
+                                    Date utilDate = new Date();
+                                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime() * 1000);
+                                    
+                                    NewToDo newItem = new NewToDo();
+                                    newItem.NewToDo(id, content, false, sqlDate, 1, 9);
+                                    }
+                                }
+                            %>
                           </div>
                         </div>
                       </div>
@@ -130,14 +152,11 @@
 
 
 <% 
-
+    String content = request.getParameter("content");
     if (session.getAttribute("LoggedIn") != null){
-		out.println("Test");
+		
 	}
     
-
-
-
     //DBTools db = new DBTools();
     //List ls = db.getToDoById(1);
 %>

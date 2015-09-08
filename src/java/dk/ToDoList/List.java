@@ -30,12 +30,12 @@ public class List {
 	public int getFrequency() {return this.freq;}
 	public int getCategory() {return this.cat;}
         
-        @Override
-        public String toString() {
-        dato = Calendar.getInstance().getTime();
+
+        public String dateToString(Date date) {
+        
         DateFormat dateFormat = new SimpleDateFormat("ddd-mmm-yyyy HH:mm");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+2"));
         
-        return dateFormat.format(dato);
+        return dateFormat.format(date);
     }
 }
