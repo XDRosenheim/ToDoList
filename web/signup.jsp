@@ -12,8 +12,8 @@
         <div class="container">
 			<form method="post" action="registration.jsp" class="form-signin">
 				<h2 class="form-signin-heading">New account.</h2>
-				<input name="username" type="text" id="inputUsername" class="form-control form-signin-first" placeholder="Username" required="" autofocus="">
-				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+				<input name="username" type="text" id="inputUsername" class="form-control form-signin-first" placeholder="Username" required="" autofocus="" pattern="[A-Za-z]{1,120}" title="Må ikke indholde tegn.">
+				<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Mindst 8 cifre, og skal indeholde Store og små bogstaver samt tal og tegn.">
 				<input name="passwordAgain" type="password" id="inputPasswordAgain" class="form-control form-signin-last" placeholder="Confirm Password" required="">
 				<%
 					if(session.getAttribute("UserExists") != null){

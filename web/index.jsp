@@ -27,37 +27,35 @@
         render: function() {
             return <table className="table">
                         <tbody>
-						<% 
+                            <% 
+                                if(session.getAttribute("LoggedIn") != null) { 
+                                    Connection con = DriverManager.getConnection(
+                                        DatabaseString.Driver + ":" +
+                                            DatabaseString.Protocol + ":" +
+                                            DatabaseString.serverURL,
+                                        DatabaseString.username,
+                                        DatabaseString.password);
+                                    Statement stmt = con.createStatement();
 
-							if(session.getAttribute("LoggedIn") != null) { 
-								Connection con = DriverManager.getConnection(
-									DatabaseString.Driver + ":" +
-										DatabaseString.Protocol + ":" +
-										DatabaseString.serverURL,
-									DatabaseString.username,
-									DatabaseString.password);
-								Statement stmt = con.createStatement();
+                                    ResultSet rs = stmt.executeQuery("SELECT textToDo, cat FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
 
-								ResultSet rs = stmt.executeQuery("SELECT textToDo, cat FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
-
-								while (rs.next()) {
-									out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4></td></tr>");
-								}
-							}
-							else {
-								out.println("<h5><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></h5>");
-							}
-						%>
-                                                         
+                                    while (rs.next()) {
+                                        out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4></td></tr>");
+                                    }
+                                }
+                                else {
+                                    out.println("<h5><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></h5>");
+                                }
+                            %>
                         </tbody>
                     </table>;
        }
     });
     
-
     var AddNewModal = React.createClass({
         render: function () {
         return  <div>
+
                     <button type="button" className="btn btn-primary navbar-left" data-toggle="modal" data-target="#myModal">
                         Add New Todo  <span className="glyphicon glyphicon-plus"></span>
                     </button>
@@ -68,19 +66,16 @@
                             <h4 className="modal-title" id="myModalLabel">Add New Todo</h4>
                           </div>
                           <div className="modal-body">
+
                                 <div className="form-group">
-                                  <input id="content" name="content" type="text" className="form-control" placeholder="Todo..."/>
-                                </div>
-                                <div className="checkbox">
-                                  <label>
-                                    <input type="checkbox"/> Reminder
-                                  </label>
+                                    <form method="post" action="loggingin.jsp">
+                                        <input name="ToDoText" type="text" id="inputText" className="form-control" placeholder="Your text here" required="" autofocus="" />
+                                        <br />
+                                        <input name="remind" className="checkbox" type="checkbox" value="reminder" /><span> Remind me about this.</span>
+                                    </form>
                                 </div>
                           </div>
                           <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                             
-                            <input type="submit" id="saveTodo" name="saveTodo" className="btn btn-primary" value="Save" data-dismiss="modal"/>
                             <%
                                 if (session.getAttribute("LoggedIn") != null){
                                     if (request.getParameter("saveTodo") != null){
@@ -94,17 +89,20 @@
                                     }
                                 }
                             %>
+                            <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" className="btn btn-primary">Save</button>
+                            
                           </div>
                         </div>
                       </div>
                     </div>
                 </div>
-             }
-        });
+    }
+    });
 
     var BrandStyle = {
         color: '#CC423F',
-        fontFamily: 'Lobster',
+        fontFamily: 'Lobster', // Lobster... That's almost worst than comic-sans. ( And it's done in red :| )
         fontSize: '32px'
     };
     
@@ -112,25 +110,24 @@
        render: function() {
            return <div className={this.props.navClass}>
                    <a href="index.jsp" className={this.props.brand} style={BrandStyle}>Todo List</a>
-						<div className="navbar-collapse collapse">
-							 <AddNewModal/>  
-							<%
-								if(session.getAttribute("LoggedIn") == null) { 
-
-									out.print("<form method=\"post\" action=\"login.jsp\">"
-											+ "<button className=\"btn btn-primary navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Login"
-											+ "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
-											+ "</form>");
-								}
-								else {
-									out.print("<form method=\"post\" action=\"logginout.jsp\">"
-											+ "<button className=\"btn btn-primary navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Logout"
-											+ "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
-											+ "</form>");
-								}
-							%>
-						</div>
-                                            </div>;
+                    <div className="navbar-collapse collapse">
+                        <AddNewModal/>  
+                        <%
+                            if(session.getAttribute("LoggedIn") == null) { 
+                                out.print("<form method=\"post\" action=\"login.jsp\">"
+                                        + "<button className=\"btn btn-primary btn-lg navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Login"
+                                        + "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
+                                        + "</form>");
+                            }
+                            else {
+                                out.print("<form method=\"post\" action=\"logginout.jsp\">"
+                                        + "<button className=\"btn btn-primary btn-lg navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Logout"
+                                        + "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
+                                        + "</form>");
+                            }
+                        %>
+                    </div>
+                </div>;
             } 
     });
     
@@ -147,6 +144,7 @@
         <Main/>,
         document.getElementById('container')
       );
+
     
 </script>
 
@@ -160,8 +158,6 @@
     //DBTools db = new DBTools();
     //List ls = db.getToDoById(1);
 %>
-
-
 
 </body>
 </html>
