@@ -68,6 +68,14 @@
                               <input name="ToDoText" type="text" id="inputText" class="form-control" placeholder="Your text here" required="" autofocus="" />
                               <br />
                               <input name="remind" type="checkbox" value="reminder" /><span> Remind me about this.</span>
+							  <br />
+							  <select name="colour" onchange="document.productForm.submit();">
+								<option value="dropdown">Pls select one</option>
+								<option value="apple">Apple</option>
+								<option value="oragne">Orange</option>
+								<option value="grapes">Grapes</option>
+							  </select>
+							  <input type="shown" name="dropdown" id="dropdown" />
                             </form>
                           </div>
                           <div className="modal-footer">
