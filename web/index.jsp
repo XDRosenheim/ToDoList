@@ -1,5 +1,4 @@
 <%@page import="java.sql.*"%>
-<%@page import="java.util.Date"%>
 <%@page import="dk.ToDoList.*"%>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -58,30 +57,39 @@
     var AddNewModal = React.createClass({
         render: function () {
         return  <div>
+<<<<<<< HEAD
 
                     <button type="button" className="btn btn-primary navbar-left btn-lg" data-toggle="modal" data-target="#myModal">
                         Add New Todo  <span className="glyphicon glyphicon-plus"></span>
+=======
+                    <button type="button" className="btn btn-primary btn-lg navbar-left" data-toggle="modal" data-target="#myModal" style={{marign:'2em'}}>
+                      Add New Todo
+>>>>>>> origin/master
                     </button>
-                    <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" ariaLabelledBy="myModalLabel" ariaHidden="true">
+                    <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                       <div className="modal-dialog">
                         <div className="modal-content">
                           <div className="modal-header">
                             <h4 className="modal-title" id="myModalLabel">Add New Todo</h4>
                           </div>
                           <div className="modal-body">
-
-                                <div className="form-group">
-                                    <form method="post" action="loggingin.jsp">
-                                        <input name="ToDoText" type="text" id="inputText" className="form-control" placeholder="Your text here" required="" autofocus="" />
-                                        <br />
-                                        <input name="remind" className="checkbox" type="checkbox" value="reminder" /><span> Remind me about this.</span>
-                                    </form>
-                                </div>
+                            <form method="post" action="loggingin.jsp">
+                              <input name="ToDoText" type="text" id="inputText" class="form-control" placeholder="Your text here" required="" autofocus="" />
+                              <br />
+                              <input name="remind" type="checkbox" value="reminder" /><span> Remind me about this.</span>
+							  <br />
+							  <select name="colour" onchange="document.productForm.submit();">
+								<option value="dropdown">Pls select one</option>
+								<option value="apple">Apple</option>
+								<option value="oragne">Orange</option>
+								<option value="grapes">Grapes</option>
+							  </select>
+							  <input type="shown" name="dropdown" id="dropdown" />
+                            </form>
                           </div>
                           <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
                             <button type="submit" className="btn btn-primary">Save</button>
-                            
                           </div>
                         </div>
                       </div>
@@ -135,19 +143,6 @@
         document.getElementById('container')
       );
 
-    
 </script>
-
-
-<% 
-    String content = request.getParameter("content");
-    if (session.getAttribute("LoggedIn") != null){
-		
-	}
-    
-    //DBTools db = new DBTools();
-    //List ls = db.getToDoById(1);
-%>
-
 </body>
 </html>
