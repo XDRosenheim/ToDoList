@@ -44,3 +44,28 @@ and open the template in the editor.
 .btn-login {
 	margin-left: 20px;
 }
+
+.red {
+    background-color: #FF4D4D;
+    color: white;
+}
+
+.blue{
+    background-color: #70B8FF;
+    color: white;
+}
+
+.green {
+    background-color: #66A366;
+    color: white;
+}
+
+.white {
+    background-color: white;
+    color: #122b40;
+}
+
+
+
+
+

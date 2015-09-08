@@ -36,12 +36,29 @@
                                         DatabaseString.password);
                                     Statement stmt = con.createStatement();
 
-                                    ResultSet rs = stmt.executeQuery("SELECT textToDo, cat, dato FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
-                                    Date date = new Date();
-                                    Date converted = new Date(date.getTime() * 1000);
+                                    ResultSet rs = stmt.executeQuery("SELECT ID, textToDo, cat, dato FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
+                                   
+                                    String colour = "white";
+                                    int id;
+                                    
                                     while (rs.next()) {
-                                        
-                                        out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4><br/><p fontSize='3' style={{color: 'grey'}}>" + rs.getDate("dato") + "</p></td></tr>");
+                                         id = rs.getInt("ID");
+                                        switch(rs.getInt("cat")){
+                                        case 1:
+                                            colour = "red";
+                                            break;
+                                        case 2:
+                                            colour = "green";
+                                            break;
+                                        case 3:
+                                            colour = "blue";
+                                            break;
+                                        default:
+                                            colour = "black";
+                                            break;
+                                    }
+                                        out.println("<tr className=\"" + colour + "\"><td><h4>" + rs.getString("textToDo") + "</h4><br/><p fontSize='3' style={{color: 'lightgrey'}}>" + rs.getDate("dato") + "</p></td>"
+                                                + "<td><form method='post' action='deleteToDo.jsp'><button name='ID' value='"+ id +"' id='delTodo' className='btn btn-warning btn-lg'>Delete</button></form></td></tr>");
                        
                                     }   
                                 }
@@ -57,39 +74,32 @@
     var AddNewModal = React.createClass({
         render: function () {
         return  <div>
-<<<<<<< HEAD
-
                     <button type="button" className="btn btn-primary navbar-left btn-lg" data-toggle="modal" data-target="#myModal">
                         Add New Todo  <span className="glyphicon glyphicon-plus"></span>
-=======
-                    <button type="button" className="btn btn-primary btn-lg navbar-left" data-toggle="modal" data-target="#myModal" style={{marign:'2em'}}>
-                      Add New Todo
->>>>>>> origin/master
                     </button>
-                    <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                       <div className="modal-dialog">
                         <div className="modal-content">
                           <div className="modal-header">
                             <h4 className="modal-title" id="myModalLabel">Add New Todo</h4>
                           </div>
                           <div className="modal-body">
-                            <form method="post" action="loggingin.jsp">
-                              <input name="ToDoText" type="text" id="inputText" class="form-control" placeholder="Your text here" required="" autofocus="" />
+                            <form method="post" action="newToDo.jsp">
+                              <input name="ToDoText" type="text" id="inputText" className="form-control" placeholder="Your text here" required="" autofocus="" />
                               <br />
                               <input name="remind" type="checkbox" value="reminder" /><span> Remind me about this.</span>
-							  <br />
-							  <select name="colour" onchange="document.productForm.submit();">
-								<option value="dropdown">Pls select one</option>
-								<option value="apple">Apple</option>
-								<option value="oragne">Orange</option>
-								<option value="grapes">Grapes</option>
-							  </select>
-							  <input type="shown" name="dropdown" id="dropdown" />
+                                <br />
+                                <select name="colour">
+                                      <option value="dropdown">Category</option>
+                                      <option value="apple">Birthday</option>
+                                      <option value="orange">Work</option>
+                                      <option value="grapes">Hobby</option>
+                                </select>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" className="btn btn-primary">Save</button>
+                                </div>
                             </form>
-                          </div>
-                          <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" className="btn btn-primary">Save</button>
                           </div>
                         </div>
                       </div>
@@ -109,7 +119,7 @@
            return <div className={this.props.navClass}>
                    <a href="index.jsp" className={this.props.brand} style={BrandStyle}>Todo List</a>
                     <div className="navbar-collapse collapse">
-                        <AddNewModal/>  
+                        
                         <%
                             if(session.getAttribute("LoggedIn") == null) { 
                                 out.print("<form method=\"post\" action=\"login.jsp\">"
@@ -118,7 +128,7 @@
                                         + "</form>");
                             }
                             else {
-                                out.print("<form method=\"post\" action=\"logginout.jsp\">"
+                                out.print("<AddNewModal/>  <form method=\"post\" action=\"logginout.jsp\">"
                                         + "<button className=\"btn btn-primary btn-lg navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Logout"
                                         + "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
                                         + "</form>");

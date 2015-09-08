@@ -7,10 +7,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="react-bs/react-bootstrap.min.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> <!-- Font awesome! -->
     <link rel="stylesheet" href="css/bootstrap.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> <!-- Font awesome! -->
+    
+    <link rel="stylesheet" href="css/style.css"/>
+    
     <title>ToDoList</title>
 </head>
 <body>
@@ -18,110 +21,103 @@
 
 <script type="text/jsx">
      /** @jsx React.DOM */
-    var Button = ReactBootstrap.Button;
-    var ModalTrigger = ReactBootstrap.ModalTrigger;
-    var Modal = ReactBootstrap.Modal;
-    
 
     var TodoItems = React.createClass({
         render: function() {
             return <table className="table">
                         <tbody>
+                            <% 
+                                if(session.getAttribute("LoggedIn") != null) { 
+                                    Connection con = DriverManager.getConnection(
+                                        DatabaseString.Driver + ":" +
+                                            DatabaseString.Protocol + ":" +
+                                            DatabaseString.serverURL,
+                                        DatabaseString.username,
+                                        DatabaseString.password);
+                                    Statement stmt = con.createStatement();
 
-                                                <% 
-                      
-
-							if(session.getAttribute("LoggedIn") != null) { 
-								Connection con = DriverManager.getConnection(
-									DatabaseString.Driver + ":" +
-										DatabaseString.Protocol + ":" +
-										DatabaseString.serverURL,
-									DatabaseString.username,
-									DatabaseString.password);
-								Statement stmt = con.createStatement();
-
-								ResultSet rs = stmt.executeQuery("SELECT textToDo FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
-								
-								while (rs.next()) {
-									out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4></td></tr>");
-								}
-							}
-							else {
-								out.println("<p><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></p>");
-							}
-						%>
+                                    ResultSet rs = stmt.executeQuery("SELECT textToDo, cat, dato FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
+                                   
+                                    while (rs.next()) {
+                                        
+                                        out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4><br/><p fontSize='3' style={{color: 'grey'}}>" + rs.getDate("dato") + "</p></td></tr>");
+                       
+                                    }   
+                                }
+                                else {
+                                    out.println("<h5><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></h5>");
+                                }
+                            %>
                         </tbody>
                     </table>;
        }
     });
     
-    const AddNewModal = React.createClass({
-
-    getInitialState(){
-       return { showModal:false };
-   },
-
-   close(){
-       this.setState({ showModal:false });
-   },
-
-   open(){
-       this.setState({ showModal:true });
-   },  
-        render() {
-            return (
-                <div>
-                    <Modal show={this.state.showModal} onHide={this.close}>
-                        <Modal.Header>
-                           <Modal.Title>Add New Todo</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                           hej
-                        </Modal.Body>
-                      <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
-                      </Modal.Footer>
-                    </Modal>
+    var AddNewModal = React.createClass({
+        render: function () {
+        return  <div>
+                    <button type="button" className="btn btn-primary navbar-left btn-lg" data-toggle="modal" data-target="#myModal">
+                        Add New Todo  <span className="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h4 className="modal-title" id="myModalLabel">Add New Todo</h4>
+                          </div>
+                          <div className="modal-body">
+                            <form method="post" action="newToDo.jsp">
+                              <input name="ToDoText" type="text" id="inputText" class="form-control" placeholder="Your text here" required="" autofocus="" />
+                              <br />
+                              <input name="remind" type="checkbox" value="reminder" /><span> Remind me about this.</span>
+                                <br />
+                                <select name="colour">
+                                      <option value="dropdown">Pls select one</option>
+                                      <option value="apple">Apple</option>
+                                      <option value="orange">Orange</option>
+                                      <option value="grapes">Grapes</option>
+                                </select>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" className="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
-            );
-        }
+    }
     });
-    
 
-					
-						
- 
+    var BrandStyle = {
+        color: '#CC423F',
+        fontFamily: 'Lobster', // Lobster... That's almost worst than comic-sans. ( And it's done in red :| )
+        fontSize: '32px'
+    };
     
     var ToolBar = React.createClass({
        render: function() {
            return <div className={this.props.navClass}>
-
-            
-
-                        <a href="index.jsp" className={this.props.brand}>Todo List</a>
-						<div class="navbar-collapse collapse">
-							<ModalTrigger modal={<AddNewModal/>}>
-                                                        <Button bsStyle='primary'>Add New   <span className="glyphicon glyphicon-plus"></span></Button>
-                                                        </ModalTrigger>
-							
-                                                        <%
-								if(session.getAttribute("LoggedIn") == null){ 
-									out.print("<form method=\"post\" action=\"login.jsp\">"
-											+ "<button className=\"btn btn-primary navbar-btn navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">"
-											+ "Login"
-											+ "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
-											+ "</form>");
-								}
-								else{
-									out.print("<form method=\"post\" action=\"logginout.jsp\">"
-											+ "<button className=\"btn btn-primary navbar-btn navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">"
-											+ "Logout"
-											+ "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
-											+ "</form>");
-								}
-							%>
-						</div>
-                   </div>;
+                   <a href="index.jsp" className={this.props.brand} style={BrandStyle}>Todo List</a>
+                    <div className="navbar-collapse collapse">
+                        
+                        <%
+                            if(session.getAttribute("LoggedIn") == null) { 
+                                out.print("<form method=\"post\" action=\"login.jsp\">"
+                                        + "<button className=\"btn btn-primary btn-lg navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Login"
+                                        + "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
+                                        + "</form>");
+                            }
+                            else {
+                                out.print("<AddNewModal/>  <form method=\"post\" action=\"logginout.jsp\">"
+                                        + "<button className=\"btn btn-primary btn-lg navbar-left btn-login\" type=\"submit\" data-toggle=\"modal\" data-target=\"#addNewModal\">Logout"
+                                        + "<span className=\"fa fa-user fa-fw\" aria-hidden=\"true\"></span></button>"
+                                        + "</form>");
+                            }
+                        %>
+                    </div>
+                </div>;
             } 
     });
     
@@ -138,21 +134,7 @@
         <Main/>,
         document.getElementById('container')
       );
-    
+
 </script>
-
-<% 
-
-    if (session.getAttribute("LoggedIn") != null){
-		out.println("Test");
-	}
-    
-
-
-
-    //DBTools db = new DBTools();
-    //List ls = db.getToDoById(1);
-%>
-
 </body>
 </html>
