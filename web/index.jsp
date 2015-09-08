@@ -37,11 +37,14 @@
                                         DatabaseString.password);
                                     Statement stmt = con.createStatement();
 
-                                    ResultSet rs = stmt.executeQuery("SELECT textToDo, cat FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
-
+                                    ResultSet rs = stmt.executeQuery("SELECT textToDo, cat, dato FROM ToDo where userOwner = '" + session.getAttribute("LoggedInID") + "';");
+                                    Date date = new Date();
+                                    Date converted = new Date(date.getTime() * 1000);
                                     while (rs.next()) {
-                                        out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4></td></tr>");
-                                    }
+                                        
+                                        out.println("<tr><td><h4>" + rs.getString("textToDo") + "</h4><br/><p fontSize='3' style={{color: 'grey'}}>" + rs.getDate("dato") + "</p></td></tr>");
+                       
+                                    }   
                                 }
                                 else {
                                     out.println("<h5><a href=\"login.jsp\">Login</a> or <a href=\"signup.jsp\">register</a></h5>");
@@ -56,7 +59,7 @@
         render: function () {
         return  <div>
 
-                    <button type="button" className="btn btn-primary navbar-left" data-toggle="modal" data-target="#myModal">
+                    <button type="button" className="btn btn-primary navbar-left btn-lg" data-toggle="modal" data-target="#myModal">
                         Add New Todo  <span className="glyphicon glyphicon-plus"></span>
                     </button>
                     <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" ariaLabelledBy="myModalLabel" ariaHidden="true">
@@ -76,19 +79,6 @@
                                 </div>
                           </div>
                           <div className="modal-footer">
-                            <%
-                                if (session.getAttribute("LoggedIn") != null){
-                                    if (request.getParameter("saveTodo") != null){
-                                    String content = request.getParameter("content");
-                                    int id = Integer.parseInt((session.getAttribute("LoggedInId").toString()));
-                                    Date utilDate = new Date();
-                                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime() * 1000);
-                                    
-                                    NewToDo newItem = new NewToDo();
-                                    newItem.NewToDo(id, content, false, sqlDate, 1, 9);
-                                    }
-                                }
-                            %>
                             <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
                             <button type="submit" className="btn btn-primary">Save</button>
                             
